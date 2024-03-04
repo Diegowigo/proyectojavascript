@@ -8,7 +8,6 @@ function obtenerIngrediente(mensaje) {
     alert("Por favor, ingresa uno de los ingredientes anotados.");
     ingrediente = prompt(mensaje);
   }
-
   return ingrediente;
 }
 
