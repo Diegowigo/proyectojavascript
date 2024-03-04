@@ -1,5 +1,6 @@
 alert("¡Bienvenido(a) a recetas de tu cocina!");
 
+//Función para obtener el primer y segundo ingrediente
 function obtenerIngrediente(mensaje) {
   let ingrediente = prompt(mensaje);
 
@@ -11,18 +12,21 @@ function obtenerIngrediente(mensaje) {
   return ingrediente;
 }
 
+//Llamado de función
 let ingrediente1 = obtenerIngrediente("Ingrese su primer ingrediente que sea uno de los siguientes: tomate, lechuga, papas, carne:");
 let cantidad1 = prompt("¿Cuántos de " + ingrediente1 + " tienes?");
 
 let ingrediente2 = obtenerIngrediente("Ingrese su segundo ingrediente que sea uno de los siguientes: tomate, lechuga, papas, carne:");
 let cantidad2 = prompt("¿Cuántos de " + ingrediente2 + " tienes?");
 
+//Determinar la menor cantidad para sacar n° de platos
 if (cantidad1 >= cantidad2) {
   cantidadTotal = cantidad2;
 } else {
   cantidadTotal = cantidad1;
 }
 
+//Selección de recetas
 if (ingrediente1 && ingrediente2) {
   if (ingrediente1 === "tomate" && ingrediente2 === "tomate") {
     alert("Puedes cocinar " + cantidadTotal + " tomates confitados.");
