@@ -34,10 +34,12 @@ while (quantity2 !== parseInt(quantity2.toString())) {
 //Determinar la menor cantidad para sacar n° de platos y si son iguales, sumarlos
 if (quantity1 >= quantity2) {
   totalQuantity = quantity2;
-} else if (ingredient1 === ingredient2) {
-  totalQuantity = quantity1 + quantity2;
 } else {
   totalQuantity = quantity1;
+}
+
+if (ingredient1 === ingredient2) {
+  totalQuantity = quantity1 + quantity2;
 }
 
 //Selección de recetas con switch
