@@ -1,0 +1,4 @@
+- Hacer un Week Planner donde se pregunta día por día de la semana que se quiere hacer durante la tarde, mañana y noche. Se guardan los datos y repite por cada día de la semana.
+Al final te muestra el plan de la semana.
+
+- Pedir ingredientes con su cantidad (ya están definidos), que diga cual y cuantos platos se pueden hacer. por ejemplo: papa + carne = papas fritas con lomo = papas asadas con filete.
