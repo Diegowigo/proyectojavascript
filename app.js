@@ -42,97 +42,35 @@ if (ingredient1 === ingredient2) {
   totalQuantity = quantity1 + quantity2;
 }
 
-//Selección de recetas con switch
-switch (ingredient1 + "|" + ingredient2) {
-  case "tomate|tomate":
-    alert("Puedes cocinar " + totalQuantity + " tomates confitados.");
-    break;
-  case "tomate|lechuga":
-    alert("Puedes cocinar " + totalQuantity + " ensalada.");
-    break;
-  case "tomate|papas":
-    alert("Puedes cocinar " + totalQuantity + " papas con salsa de tomates.");
-    break;
-  case "tomate|carne":
-    alert("Puedes cocinar " + totalQuantity + " salteado de carne con tomates.");
-    break;
-  case "lechuga|tomate":
-    alert("Puedes cocinar " + totalQuantity + " ensalada.");
-    break;
-  case "lechuga|lechuga":
-    alert("Puedes cocinar " + totalQuantity + " ensalada de lechuga.");
-    break;
-  case "lechuga|papas":
-    alert("Puedes cocinar " + totalQuantity + " ensalada de papas.");
-    break;
-  case "lechuga|carne":
-    alert("Puedes cocinar " + totalQuantity + " tacos de lechuga rellenos de carne.");
-    break;
-  case "papas|tomate":
-    alert("Puedes cocinar " + totalQuantity + " papas con salsa de tomates.");
-    break;
-  case "papas|lechuga":
-    alert("Puedes cocinar " + totalQuantity + " ensalada de papas.");
-    break;
-  case "papas|papas":
-    alert("Puedes cocinar " + totalQuantity + " papas fritas.");
-    break;
-  case "papas|carne":
-    alert("Puedes cocinar " + totalQuantity + " carne con papas fritas.");
-    break;
-  case "carne|tomate":
-    alert("Puedes cocinar " + totalQuantity + " salteado de carnes con tomate.");
-    break;
-  case "carne|lechuga":
-    alert("Puedes cocinar " + totalQuantity + " tacos de lechuga rellenos de carne.");
-    break;
-  case "carne|papas":
-    alert("Puedes cocinar " + totalQuantity + " carne con papas fritas.");
-    break;
-  case "carne|carne":
-    alert("Puedes cocinar " + totalQuantity + " carne asada.");
-    break;
-  default:
-    alert("Lo siento, no hay una receta definida para estos ingredientes.");
-    break;
+// Definición en un array de objetos con las combinaciones de ingredientes y sus recetas
+const recipes = [
+  { id: 1, ingredients: ["tomate", "tomate"], recipe: "tomates confitados" },
+  { id: 2, ingredients: ["tomate", "lechuga"], recipe: "ensalada" },
+  { id: 3, ingredients: ["tomate", "papas"], recipe: "papas con salsa de tomates" },
+  { id: 4, ingredients: ["tomate", "carne"], recipe: "salteado de carne con tomates" },
+  { id: 5, ingredients: ["lechuga", "tomate"], recipe: "ensalada" },
+  { id: 6, ingredients: ["lechuga", "lechuga"], recipe: "ensalada de lechuga" },
+  { id: 7, ingredients: ["lechuga", "papas"], recipe: "ensalada de papas" },
+  { id: 8, ingredients: ["lechuga", "carne"], recipe: "tacos de lechuga rellenos de carne" },
+  { id: 9, ingredients: ["papas", "tomate"], recipe: "papas con salsa de tomates" },
+  { id: 10, ingredients: ["papas", "lechuga"], recipe: "ensalada de papas" },
+  { id: 11, ingredients: ["papas", "papas"], recipe: "papas fritas" },
+  { id: 12, ingredients: ["papas", "carne"], recipe: "carne con papas fritas" },
+  { id: 13, ingredients: ["carne", "tomate"], recipe: "salteado de carnes con tomate" },
+  { id: 14, ingredients: ["carne", "lechuga"], recipe: "tacos de lechuga rellenos de carne" },
+  { id: 15, ingredients: ["carne", "papas"], recipe: "carne con papas fritas" },
+  { id: 16, ingredients: ["carne", "carne"], recipe: "carne asada" }
+];
+
+// Función para buscar la receta según cada ingrediente; uso del método find para buscar la receta en el array de objetos, uso del método every para recorrer los ingredientes y comprobar con include si existen
+function findRecipe(ingredient1, ingredient2) {
+  const twoIngredients = [ingredient1, ingredient2];
+  const matchedRecipe = recipes.find(recipe => {
+    return recipe.ingredients.every(ingredient => twoIngredients.includes(ingredient));
+  });  
+  return matchedRecipe ? matchedRecipe.recipe : "Lo siento, no hay una receta definida para estos ingredientes.";
 }
 
-//Selección de recetas con if
-/* if (ingredient1 && ingredient2) {
-  if (ingredient1 === "tomate" && ingredient2 === "tomate") {
-    alert("Puedes cocinar " + totalQuantity + " tomates confitados.");
-  } else if (ingredient1 === "tomate" && ingredient2 === "lechuga") {
-    alert("Puedes cocinar " + totalQuantity + " ensalada.");
-  } else if (ingredient1 === "tomate" && ingredient2 === "papas") {
-    alert("Puedes cocinar " + totalQuantity + " papas con salsa de tomates.");
-  } else if (ingredient1 === "tomate" && ingredient2 === "carne") {
-    alert("Puedes cocinar " + totalQuantity + " salteado de carne con tomates.");
-  } else if (ingredient1 === "lechuga" && ingredient2 === "tomate") {
-    alert("Puedes cocinar " + totalQuantity + " ensalada.");
-  } else if (ingredient1 === "lechuga" && ingredient2 === "lechuga") {
-    alert("Puedes cocinar " + totalQuantity + " ensalada de lechuga.");
-  } else if (ingredient1 === "lechuga" && ingredient2 === "papas") {
-    alert("Puedes cocinar " + totalQuantity + " ensalada de papas.");
-  } else if (ingredient1 === "lechuga" && ingredient2 === "carne") {
-    alert("Puedes cocinar " + totalQuantity + " tacos de lechuga rellenos de carne.");
-  } else if (ingredient1 === "papas" && ingredient2 === "tomate") {
-      alert("Puedes cocinar " + totalQuantity + " papas con salsa de tomates.");
-  } else if (ingredient1 === "papas" && ingredient2 === "lechuga") {
-      alert("Puedes cocinar " + totalQuantity + " ensalada de papas.");
-  } else if (ingredient1 === "papas" && ingredient2 === "papas") {
-      alert("Puedes cocinar " + totalQuantity + " papas fritas.");
-  } else if (ingredient1 === "papas" && ingredient2 === "carne") {
-      alert("Puedes cocinar " + totalQuantity + " carne con papas fritas.");
-  } else if (ingredient1 === "carne" && ingredient2 === "tomate") {
-      alert("Puedes cocinar " + totalQuantity + " salteado de carnes con tomate.");
-  } else if (ingredient1 === "carne" && ingredient2 === "lechuga") {
-      alert("Puedes cocinar " + totalQuantity + " tacos de lechuga rellenos de carne.");
-  } else if (ingredient1 === "carne" && ingredient2 === "papas") {
-      alert("Puedes cocinar " + totalQuantity + " carne con papas fritas.");
-  } else if (ingredient1 === "carne" && ingredient2 === "carne") {
-      alert("Puedes cocinar " + totalQuantity + " carne asada.");
-    } else {
-    alert("Lo siento, no hay una receta definida para estos ingredientes.");
-  } } else {
-  alert("Por favor, asegúrate de proporcionar dos ingredientes válidos para buscar una receta.");
-} */
+// Usar la función para obtener la receta y mostrar con alert el resultado final
+const recipe = findRecipe(ingredient1, ingredient2);
+alert("Puedes cocinar " + totalQuantity + " " + recipe + ".");
