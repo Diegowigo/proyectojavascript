@@ -2,3 +2,7 @@
 Al final te muestra el plan de la semana.
 
 - Pedir ingredientes con su cantidad (ya están definidos), que diga cual y cuantos platos se pueden hacer. por ejemplo: papa + carne = papas fritas con lomo = papas asadas con filete.
+
+Features:
+- Que el usuario pueda agregar ingredientes y recetas con ellos (push al array) y así crear un banco de recetas con ingredientes usuales del usuario.
+- Agregar recetas de los mismos ingredientes.

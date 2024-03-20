@@ -15,25 +15,25 @@ const getIngredient = (message) => {
 let ingredient1 = getIngredient("Ingrese su primer ingrediente que sea uno de los siguientes: tomate, lechuga, papas, carne:");
 
 //Pedir cantidad de ingrediente 1 y revisar si es un número
-let quantity1 = Number(prompt("¿Cuántos de " + ingredient1 + " tienes?"));
+let quantity1 = Number(prompt(`¿Cuántos de ${ingredient1} tienes?`));
 while (quantity1 !== parseInt(quantity1.toString())) {
     alert("Por favor, ingrese su cantidad en números.");
-    quantity1 = Number(prompt("¿Cuántos de " + ingredient1 + " tienes?"));
+    quantity1 = Number(prompt(`¿Cuántos de ${ingredient1} tienes?`));
 }
 
 //Llamado de función para ingrediente 2
 let ingredient2 = getIngredient("Ingrese su segundo ingrediente que sea uno de los siguientes: tomate, lechuga, papas, carne:");
 
 //Pedir cantidad de ingrediente 2 y revisar si es un número
-let quantity2 = Number(prompt("¿Cuántos de " + ingredient2 + " tienes?"));
+let quantity2 = Number(prompt(`¿Cuántos de ${ingredient2} tienes?`));
 while (quantity2 !== parseInt(quantity2.toString())) {
     alert("Por favor, ingrese su cantidad en números.");
-    quantity2 = Number(prompt("¿Cuántos de " + ingredient2 + " tienes?"));
+    quantity2 = Number(prompt(`¿Cuántos de ${ingredient2} tienes?`));
 }
 
 //Determinar la menor cantidad para sacar n° de platos y si son iguales, sumarlos
 if (quantity1 >= quantity2) {
-  totalQuantity = quantity2;
+totalQuantity = quantity2;
 } else {
   totalQuantity = quantity1;
 }
@@ -62,15 +62,16 @@ const recipes = [
   { id: 16, ingredients: ["carne", "carne"], recipe: "carne asada" }
 ];
 
-// Función para buscar la receta según cada ingrediente; uso del método find para buscar la receta en el array de objetos, uso del método every para recorrer los ingredientes y comprobar con include si existen
+// Función para buscar la receta según cada ingrediente; uso del método find para buscar la receta en el array de objetos comprobando con el uso del método every e includes para recorrer los ingredientes y recetas y así comprobar que existen en el array de objetos
 function findRecipe(ingredient1, ingredient2) {
   const twoIngredients = [ingredient1, ingredient2];
   const matchedRecipe = recipes.find(recipe => {
-    return recipe.ingredients.every(ingredient => twoIngredients.includes(ingredient));
-  });  
+    return twoIngredients.every(ingredient => recipe.ingredients.includes(ingredient)) &&
+           recipe.ingredients.every(ingredient => twoIngredients.includes(ingredient));
+  });
   return matchedRecipe ? matchedRecipe.recipe : "Lo siento, no hay una receta definida para estos ingredientes.";
 }
 
 // Usar la función para obtener la receta y mostrar con alert el resultado final
 const recipe = findRecipe(ingredient1, ingredient2);
-alert("Puedes cocinar " + totalQuantity + " " + recipe + ".");
+alert(`Puedes cocinar ${totalQuantity} ${recipe}.`);
