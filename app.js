@@ -95,6 +95,3 @@ function showRecipes() {
   tableHTML += "</tbody></table>";
   recipesTableContainer.innerHTML = tableHTML;
 }
-
-// const clearRecipes = document.getElementById()
-// storage.clear();
