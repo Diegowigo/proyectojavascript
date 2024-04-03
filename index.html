@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
     <title>Recetas de tu cocina</title>
 </head>
+
 <body>
-    <script src="app.js"></script>
+    <h1>¡Bienvenido(a) a recetas de tu cocina!</h1>
+
+    <h2>Por favor, ingresa tus ingredientes y su cantidad:</h2>
+
+    <form id="recipeForm">
+        <div>
+            <label for="ingredient1">Primer ingrediente:</label>
+            <select id="ingredient1">
+                <option value="">--Seleccione un ingrediente--</option>
+                <option value="tomate">Tomate</option>
+                <option value="lechuga">Lechuga</option>
+                <option value="papas">Papas</option>
+                <option value="carne">Carne</option>
+            </select>
+            <input type="number" id="quantity1" placeholder="Cantidad" min="1">
+        </div>
+        <div>
+            <label for="ingredient2">Segundo ingrediente:</label>
+            <select id="ingredient2">
+                <option value="">--Seleccione un ingrediente--</option>
+                <option value="tomate">Tomate</option>
+                <option value="lechuga">Lechuga</option>
+                <option value="papas">Papas</option>
+                <option value="carne">Carne</option>
+            </select>
+            <input type="number" id="quantity2" placeholder="Cantidad" min="1">
+        </div>
+        <button type="button" id="calculateRecipe">Calcular Receta</button>
+    </form>
+
+    <div id="recipeResult"></div>
+
 </body>
+
 </html>
