@@ -1,51 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const calculateButton = document.getElementById("calculateRecipe");
-  const addRecipeButton = document.getElementById("addRecipe");
-  const resultArea = document.getElementById("recipeResult");
-  const resultAreaRecipe = document.getElementById("addRecipeResult");
+  const calculateBtn = document.getElementById("calculateRecipe");
+  const addRecipeBtn = document.getElementById("addRecipe");
   const showRecipesBtn = document.getElementById("showRecipesBtn");
   showRecipesBtn.addEventListener("click", showRecipes);
   
   loadRecipes();
 
-  calculateButton.addEventListener("click", () => {
+  calculateBtn.addEventListener("click", () => {
     const ingredient1 = document.getElementById("ingredient1").value;
     const quantity1 = parseInt(document.getElementById("quantity1").value, 10);
     const ingredient2 = document.getElementById("ingredient2").value;
     const quantity2 = parseInt(document.getElementById("quantity2").value, 10);
 
     if (!ingredient1 || !ingredient2 || isNaN(quantity1) || isNaN(quantity2)) {
-        resultArea.textContent = "Por favor, complete correctamente todos los campos.";
-        return;
+      Swal.fire({
+        icon: "error",
+        text: "Por favor, complete correctamente todos los campos.",
+      });
+      return;
     }
 
     let totalQuantity = ingredient1 === ingredient2 ? quantity1 + quantity2 : Math.min(quantity1, quantity2);
 
     const recipe = findRecipe(ingredient1, ingredient2);
-    resultArea.textContent = `Puedes cocinar ${totalQuantity} ${recipe}.`;
+    Swal.fire({
+      title: `Puedes cocinar ${totalQuantity} ${recipe}.`,
+      iconHtml: '<img src=/img/favicon.svg width="100px" height="100px">',
+    });
   });
 
-  addRecipeButton.addEventListener("click", () => {
+  addRecipeBtn.addEventListener("click", () => {
     const newIngredient1 = document.getElementById("newIngredient1").value;
     const newIngredient2 = document.getElementById("newIngredient2").value;
     const newRecipeName = document.getElementById("newRecipeName").value;
 
     if (!newIngredient1 || !newIngredient2 || !newRecipeName) {
-      resultAreaRecipe.textContent = "Por favor, completa todos los campos para la nueva receta.";
+      Swal.fire({
+        icon: "error",
+        text: "Por favor, complete correctamente todos los campos.",
+      });
       return;
     }
 
     const newRecipe = {
       id: new Date().getTime(),
       ingredients: [newIngredient1, newIngredient2].sort(),
-      recipe: newRecipeName
+      recipe: newRecipeName,
     };
 
     const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
     recipes.push(newRecipe);
     localStorage.setItem("recipes", JSON.stringify(recipes));
 
-    resultAreaRecipe.textContent = "¡Receta añadida exitosamente!";
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+    Toast.fire({
+      icon: "success",
+      title: "¡Receta añadida exitosamente!"
+    });
   });
 });
 
@@ -71,7 +88,7 @@ function loadRecipes() {
     ];
     localStorage.setItem("recipes", JSON.stringify(defaultRecipes));
   }
-}
+};
 
 function findRecipe(ingredient1, ingredient2) {
   const recipes = JSON.parse(localStorage.getItem("recipes"));
@@ -80,8 +97,8 @@ function findRecipe(ingredient1, ingredient2) {
     return twoIngredients.every(ingredient => recipe.ingredients.includes(ingredient)) &&
         recipe.ingredients.every(ingredient => twoIngredients.includes(ingredient));
   });
-  return matchedRecipe ? matchedRecipe.recipe : "Lo siento, no hay una receta definida para estos ingredientes.";
-}
+  return matchedRecipe.recipe;
+};
 
 function showRecipes() {
   const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
@@ -94,4 +111,4 @@ function showRecipes() {
   });
   tableHTML += "</tbody></table>";
   recipesTableContainer.innerHTML = tableHTML;
-}
+};
