@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const recipe = findRecipe(ingredient1, ingredient2);
     Swal.fire({
       title: `Puedes cocinar ${totalQuantity} ${recipe}.`,
-      iconHtml: '<img src=/img/favicon.svg width="100px" height="100px">',
+      iconHtml: '<img src=img/favicon.svg width="100px" height="100px">',
     });
   });
 
