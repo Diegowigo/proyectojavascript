@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadFromJson() {
-  fetch('../data.json')
+  fetch('https://raw.githubusercontent.com/Diegowigo/proyectojavascript/main/data.json')
     .then(response => response.json())
     .then(data => {
       const recipes = data.defaultRecipes || [];
