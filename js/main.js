@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         text: "Por favor, complete correctamente todos los campos.",
       });
       return;
-    }
+    };
 
     let totalQuantity = ingredient1 === ingredient2 ? quantity1 + quantity2 : Math.min(quantity1, quantity2);
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         text: "Por favor, complete correctamente todos los campos.",
       });
       return;
-    }
+    };
 
     const newRecipe = {
       id: new Date().getTime(),
@@ -56,37 +56,34 @@ document.addEventListener("DOMContentLoaded", () => {
       toast: true,
       position: "top",
       showConfirmButton: false,
-      timer: 3000,
+      timer: 4000,
       timerProgressBar: true,
     });
     Toast.fire({
       icon: "success",
-      title: "¡Receta añadida exitosamente!"
+      text: "¡Receta añadida exitosamente!"
     });
   });
 });
 
+function loadFromJson() {
+  fetch('../data.json')
+    .then(response => response.json())
+    .then(data => {
+      const recipes = data.defaultRecipes || [];
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: "error",
+        text: "Error al cargar las recetas predeterminadas.",
+      });
+    });
+};
+
 function loadRecipes() {
   if (!localStorage.getItem("recipes")) {
-    const defaultRecipes = [
-        { id: 1, ingredients: ["tomate", "tomate"], recipe: "tomates confitados" },
-        { id: 2, ingredients: ["tomate", "lechuga"], recipe: "ensalada" },
-        { id: 3, ingredients: ["tomate", "papas"], recipe: "papas con salsa de tomates" },
-        { id: 4, ingredients: ["tomate", "carne"], recipe: "salteado de carne con tomates" },
-        { id: 5, ingredients: ["lechuga", "tomate"], recipe: "ensalada" },
-        { id: 6, ingredients: ["lechuga", "lechuga"], recipe: "ensalada de lechuga" },
-        { id: 7, ingredients: ["lechuga", "papas"], recipe: "ensalada de papas" },
-        { id: 8, ingredients: ["lechuga", "carne"], recipe: "tacos de lechuga rellenos de carne" },
-        { id: 9, ingredients: ["papas", "tomate"], recipe: "papas con salsa de tomates" },
-        { id: 10, ingredients: ["papas", "lechuga"], recipe: "ensalada de papas" },
-        { id: 11, ingredients: ["papas", "papas"], recipe: "papas fritas" },
-        { id: 12, ingredients: ["papas", "carne"], recipe: "carne con papas fritas" },
-        { id: 13, ingredients: ["carne", "tomate"], recipe: "salteado de carnes con tomate" },
-        { id: 14, ingredients: ["carne", "lechuga"], recipe: "tacos de lechuga rellenos de carne" },
-        { id: 15, ingredients: ["carne", "papas"], recipe: "carne con papas fritas" },
-        { id: 16, ingredients: ["carne", "carne"], recipe: "carne asada" }
-    ];
-    localStorage.setItem("recipes", JSON.stringify(defaultRecipes));
+    loadFromJson();
   }
 };
 
