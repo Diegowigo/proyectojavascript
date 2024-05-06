@@ -1,16 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const calculateBtn = document.getElementById("calculateRecipe");
-  const addRecipeBtn = document.getElementById("addRecipe");
-  const showRecipesBtn = document.getElementById("showRecipesBtn");
+  const getById = id => document.getElementById(id);
+  const calculateBtn = getById("calculateRecipe");
+  const addRecipeBtn = getById("addRecipe");
+  const showRecipesBtn = getById("showRecipesBtn");
+
   showRecipesBtn.addEventListener("click", showRecipes);
   
   loadRecipes();
 
+  const getValue = id => getById(id).value;
+
   calculateBtn.addEventListener("click", () => {
-    const ingredient1 = document.getElementById("ingredient1").value;
-    const quantity1 = parseInt(document.getElementById("quantity1").value, 10);
-    const ingredient2 = document.getElementById("ingredient2").value;
-    const quantity2 = parseInt(document.getElementById("quantity2").value, 10);
+    const ingredient1 = getValue("ingredient1");
+    const ingredient2 = getValue("ingredient2");
+    const quantity1 = parseInt(getValue("quantity1"), 10);
+    const quantity2 = parseInt(getValue("quantity2"), 10);
 
     if (!ingredient1 || !ingredient2 || isNaN(quantity1) || isNaN(quantity2)) {
       Swal.fire({
@@ -30,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   addRecipeBtn.addEventListener("click", () => {
-    const newIngredient1 = document.getElementById("newIngredient1").value;
-    const newIngredient2 = document.getElementById("newIngredient2").value;
-    const newRecipeName = document.getElementById("newRecipeName").value;
+    const newIngredient1 = getValue("newIngredient1");
+    const newIngredient2 = getValue("newIngredient2");
+    const newRecipeName = getValue("newRecipeName");
 
     if (!newIngredient1 || !newIngredient2 || !newRecipeName) {
       Swal.fire({
